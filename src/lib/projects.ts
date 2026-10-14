@@ -1,0 +1,118 @@
+export const projects = [
+  {
+    id: "aeris-one",
+    name: "AERIS One",
+    tagline: "Flagship Wireless Headphones",
+    category: "E-Commerce / Product Showcase",
+    year: "2026",
+    description:
+      "A cinematic product story for flagship wireless headphones — adaptive ANC, spatial audio, and a three-finish selector, choreographed as a scroll-driven design catalogue.",
+    highlights: [
+      "Scroll-driven product storytelling",
+      "3-finish interactive selector",
+      "Sub-2s LCP on mobile",
+      "WCAG AA contrast throughout",
+    ],
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Sharp"],
+    url: "https://arise-eight-khaki.vercel.app/",
+    thumbnail: "/images/work-aeris.png",
+    alt: "AERIS One wireless headphones product website screenshot",
+  },
+  {
+    id: "lia",
+    name: "LIA",
+    tagline: "Fire-Driven Cuisine",
+    category: "Restaurant / Hospitality",
+    year: "2026",
+    description:
+      "A fine-dining website carrying the warmth of an open flame into every pixel — seasonal menu, chef philosophy, and a reservation flow as considered as the room itself.",
+    highlights: [
+      "Immersive fire-cooking narrative",
+      "Reservation flow with validation",
+      "Editorial serif typography",
+      "Optimised for on-table mobile use",
+    ],
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Lenis"],
+    url: "https://lia-alpha-seven.vercel.app/",
+    thumbnail: "/images/work-lia.png",
+    alt: "LIA fire-driven cuisine restaurant website screenshot",
+  },
+  {
+    id: "arkhe",
+    name: "ARKHE",
+    tagline: "Architecture & Interiors",
+    category: "Architecture / Portfolio",
+    year: "2026",
+    description:
+      "A gallery-grade portfolio for a Copenhagen architecture studio — load-bearing whitespace, a project grid that lets images breathe, and restrained motion that never competes with the work.",
+    highlights: [
+      "Gallery-grade project grid",
+      "Studio philosophy & team pages",
+      "Responsive WebP image pipeline",
+      "Restrained motion, respects reduced-motion",
+    ],
+    tech: ["Next.js", "Tailwind CSS", "Lenis", "Sharp"],
+    url: "https://arkhe-chi.vercel.app/",
+    thumbnail: "/images/work-arkhe.png",
+    alt: "ARKHE architecture and interiors studio website screenshot",
+  },
+  {
+    id: "flowline",
+    name: "Flowline",
+    tagline: "Automate the Busywork",
+    category: "SaaS / B2B Platform",
+    year: "2026",
+    description:
+      "A conversion-focused SaaS landing page for visual workflow automation — enterprise trust signals upfront, 250+ integrations, and stat counters that animate once on entry.",
+    highlights: [
+      "Enterprise trust signals upfront",
+      "250+ integration showcase",
+      "Stat count-up on scroll",
+      "TBT under 200ms on mobile",
+    ],
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Sharp"],
+    url: "https://flowline-indol.vercel.app/",
+    thumbnail: "/images/work-flowline.png",
+    alt: "Flowline workflow automation SaaS website screenshot",
+  },
+  {
+    id: "iz-cafe",
+    name: "IZ Pâtisserie & Café",
+    tagline: "Artisanal Pastries & Coffee",
+    category: "Café / Food & Beverage",
+    year: "2026",
+    description:
+      "A Dhaka-based European café translated into morning light — parchment tones, a signature menu laid out like a printed carte, and a three-branch location showcase.",
+    highlights: [
+      "Signature menu as printed carte",
+      "Daily kitchen timeline narrative",
+      "Multi-branch location showcase",
+      "Optimised for outdoor phone readability",
+    ],
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Sharp"],
+    url: "https://iz-cafee-demo-1.vercel.app/",
+    thumbnail: "/images/work-iz.jpg",
+    alt: "IZ Patisserie and Cafe Dhaka website screenshot",
+  },
+  {
+    id: "workout-club",
+    name: "The Workout Club",
+    tagline: "Train Sharp. Stay Club.",
+    category: "Fitness / Gym",
+    year: "2026",
+    description:
+      "A multi-branch gym brand for serious training — six structured programs, class schedules, transparent pricing, and a founder story grounded in community.",
+    highlights: [
+      "6 structured training programs",
+      "Multi-branch class schedules",
+      "Transparent membership pricing",
+      "Responsive from 320px with 44px tap targets",
+    ],
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Sharp"],
+    url: "https://workoutclub-2.vercel.app/",
+    thumbnail: "/images/work-workoutclub.jpg",
+    alt: "The Workout Club Dhaka gym website screenshot",
+  },
+];
+
+export type Project = (typeof projects)[number];
