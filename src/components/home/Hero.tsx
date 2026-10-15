@@ -3,21 +3,16 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useScrollAnimation, shouldAnimate } from "@/hooks/useScrollAnimation";
 import { ArrowDown } from "lucide-react";
 import { ButtonLink } from "../ui/Button";
 import { OrbitRings } from "../decor/GoldAssets";
+import { useDeviceTier } from "@/hooks/useDeviceTier";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const WORDS = ["Digital", "experiences", "with"];
 
-/**
- * Scroll-driven hero shell — mounted ONLY on desktop so phones never run
- * useScroll listeners, springs, or per-frame style writes. The component
- * swap happens once right after hydration (usually beneath the preloader)
- * with identical geometry, so it is not visible.
- */
 function HeroBackdrop({ animated, children }: { animated: boolean; children: React.ReactNode }) {
   return <div className="absolute inset-0 -z-10 gpu">{animated ? <BackdropDrift animated={animated}>{children}</BackdropDrift> : children}</div>;
 }
@@ -55,12 +50,10 @@ function ContentDrift({ children }: { children: React.ReactNode }) {
 
 export default function Hero() {
   const reduce = useReducedMotion();
-  const scrollEnabled = useScrollAnimation();
+  const shouldAnim = shouldAnimate();
+  const tier = useDeviceTier();
+  const isHigh = tier === "high";
   const [ready, setReady] = useState(false);
-
-  // Determine if we should use scroll-driven animations
-  // Only on desktop with fine pointer (not mobile, not touch devices)
-  const isScrollEnabled = scrollEnabled && !reduce;
 
   // FAST FALLBACK: if preloader event doesn't fire within 2s, render content anyway
   useEffect(() => {
@@ -71,10 +64,71 @@ export default function Hero() {
   const hiddenWord = reduce ? { opacity: 0 } : { y: "110%" as const };
   const hiddenBlock = reduce ? { opacity: 0 } : { opacity: 0, y: 24 };
 
+  // Static fallback for non-high tier — identical visual layout, no motion
+
+  if (!isHigh) {
+    return (
+      <section className="min-h-svh relative flex items-center overflow-hidden pt-32 pb-20 md:pt-36">
+        <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-obsidian/70 to-obsidian" />
+        <Image
+          src="/images/hero.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="hero-img object-cover"
+          loading="lazy"
+        />
+        <OrbitRings className="pointer-events-none absolute -right-24 top-1/2 h-[38rem] w-[38rem] -translate-y-1/2 opacity-60 md:-right-10 md:opacity-90" />
+
+        <HeroContent animated={false}>
+          <div className="flex items-center gap-4">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full bg-gold opacity-70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
+            </span>
+            <p className="u-eyebrow">Accepting three partnerships for Q2 2026</p>
+          </div>
+
+          <h1 className="u-display mt-8 max-w-[18ch] text-[clamp(3rem,9.5vw,8.5rem)] leading-[0.95] text-white">
+            <span className="sr-only">Digital experiences with unreasonable attention to detail.</span>
+            <span aria-hidden className="block">
+              {WORDS.map((word, i) => (
+                <span key={word} className="inline-block overflow-hidden align-bottom">
+                  {word}
+                </span>
+              ))}
+            </span>
+          </h1>
+
+          <div className="mt-10 flex max-w-xl flex-col gap-9">
+            <p className="text-[1.0625rem] leading-relaxed text-white/60 md:text-lg">
+              Matriotic Studios LLC is a boutique web development agency. We design and
+              engineer flagship websites and digital products for brands where
+              "good enough" was never on the table.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <ButtonLink href="/contact">Start a project</ButtonLink>
+              <ButtonLink href="/portfolio" variant="outline">
+                View our work
+              </ButtonLink>
+            </div>
+          </div>
+
+          <div className="mt-20 hidden items-center gap-3 text-[0.6875rem] uppercase tracking-[0.26em] text-mist md:flex">
+            <span className="block h-5 w-px bg-white/10" />
+            <span className="h-4 w-4 text-gold strokeWidth={1.4}">↓</span>
+            Scroll to explore
+          </div>
+        </HeroContent>
+      </section>
+    );
+  }
+
+  // High tier: original animated version
   return (
     <section className="min-h-svh relative flex items-center overflow-hidden pt-32 pb-20 md:pt-36">
       {/* backdrop image */}
-      <HeroBackdrop animated={isScrollEnabled}>
+      <HeroBackdrop animated={shouldAnim}>
         <Image
           src="/images/hero.jpg"
           alt=""
@@ -89,7 +143,7 @@ export default function Hero() {
       <OrbitRings className="pointer-events-none absolute -right-24 top-1/2 h-[38rem] w-[38rem] -translate-y-1/2 opacity-60 md:-right-10 md:opacity-90" />
 
       {/* Static version for mobile/reduced motion - no useScroll */}
-      {!isScrollEnabled && (
+      {!shouldAnim && (
         <HeroContent animated={false}>
           <motion.div
             initial={{ opacity: 0, y: 14 }}
@@ -109,7 +163,14 @@ export default function Hero() {
             <span aria-hidden className="block">
               {WORDS.map((word, i) => (
                 <span key={word} className="inline-block overflow-hidden align-bottom">
-                  <span className="inline-block pr-[0.22em]">{word}</span>
+                  <motion.span
+                    className="inline-block pr-[0.22em]"
+                    initial={hiddenWord}
+                    animate={ready ? { y: "0%", opacity: 1 } : undefined}
+                    transition={{ duration: reduce ? 0.5 : 1.15, delay: 0.42 + i * 0.09, ease: EASE }}
+                  >
+                    {word}
+                  </motion.span>
                 </span>
               ))}
             </span>
@@ -152,7 +213,7 @@ export default function Hero() {
       )}
 
       {/* Scroll-driven version for desktop with fine pointer */}
-      {isScrollEnabled && (
+      {shouldAnim && (
         <HeroContent animated={true}>
           <motion.div
             initial={{ opacity: 0, y: 14 }}

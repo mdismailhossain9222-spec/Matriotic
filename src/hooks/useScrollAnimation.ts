@@ -1,14 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useDeviceTier } from "./useDeviceTier";
 
 export function useScrollAnimation() {
-  const [enabled, setEnabled] = useState(false);
+  const tier = useDeviceTier();
+  const [reduce, setReduce] = useState(false);
+
   useEffect(() => {
-    // Only enable scroll-linked animations on non-touch, desktop devices
-    const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const noReduce = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setEnabled(isDesktop && noReduce);
+    setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
-  return enabled;
+
+  // Only high tier + no reduced motion gets scroll animations
+  return tier === "high" && !reduce;
+}
+
+export function shouldAnimate() {
+  const tier = useDeviceTier();
+  return tier === "high";
 }

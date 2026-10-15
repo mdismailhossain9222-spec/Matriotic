@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import type { ElementType, ReactNode } from "react";
+import { useDeviceTier } from "@/hooks/useDeviceTier";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -21,15 +22,17 @@ export function Reveal({
   once?: boolean;
 }) {
   const reduce = useReducedMotion();
+  const tier = useDeviceTier();
+  const animate = tier === "high";
   const MotionTag = motion[as as "div"] as typeof motion.div;
 
   return (
     <MotionTag
       className={className}
-      initial={reduce ? { opacity: 0, y: 0 } : { opacity: 1 }}
+      initial={animate ? { opacity: 1 } : { opacity: 1, y: 0 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once, margin: "-12% 0px -12% 0px" }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
+      transition={{ duration: animate ? 0.9 : 0, delay, ease: EASE }}
     >
       {children}
     </MotionTag>
