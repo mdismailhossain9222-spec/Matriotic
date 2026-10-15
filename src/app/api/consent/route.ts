@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createHmac, randomBytes } from "node:crypto";
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { consentLogs } from "@/db/schema";
 
 export const runtime = "nodejs";
@@ -14,6 +14,7 @@ function secret() {
 }
 
 export async function POST(request: Request) {
+  const db = getDb();
   let body: unknown;
   try {
     body = await request.json();

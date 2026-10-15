@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { inquiries } from "@/db/schema";
 
 export const runtime = "nodejs";
@@ -17,6 +17,7 @@ const schema = z.object({
 });
 
 export async function POST(request: Request) {
+  const db = getDb();
   let payload: unknown;
   try {
     payload = await request.json();

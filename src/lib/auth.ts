@@ -2,7 +2,7 @@ import { randomBytes, scrypt as _scrypt, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 import { cookies } from "next/headers";
 import { and, eq, gt } from "drizzle-orm";
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { sessions, users } from "@/db/schema";
 
 const scrypt = promisify(_scrypt) as (
@@ -30,6 +30,7 @@ export async function verifyPassword(password: string, stored: string): Promise<
 }
 
 export async function createSession(userId: number) {
+  const db = getDb();
   const id = randomBytes(32).toString("hex");
   const expiresAt = new Date(Date.now() + SESSION_TTL_DAYS * 24 * 60 * 60 * 1000);
   await db.insert(sessions).values({ id, userId, expiresAt });
@@ -46,6 +47,7 @@ export async function createSession(userId: number) {
 }
 
 export async function destroySession() {
+  const db = getDb();
   const store = await cookies();
   const id = store.get(SESSION_COOKIE)?.value;
   if (id) {
@@ -62,6 +64,7 @@ export type SessionUser = {
 };
 
 export async function getCurrentUser(): Promise<SessionUser | null> {
+  const db = getDb();
   const store = await cookies();
   const id = store.get(SESSION_COOKIE)?.value;
   if (!id) return null;

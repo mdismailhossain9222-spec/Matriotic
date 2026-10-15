@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { eq, asc } from "drizzle-orm";
 import { ArrowUpRight, CalendarDays, LogOut } from "lucide-react";
 
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { projects } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { signOutAction } from "../actions";
@@ -19,6 +19,7 @@ export default async function DashboardPage() {
   const user = await getCurrentUser();
   if (!user) redirect("/portal");
 
+  const db = getDb();
   const rows = await db
     .select()
     .from(projects)

@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { users, projects } from "@/db/schema";
 import { createSession, destroySession, hashPassword, verifyPassword } from "@/lib/auth";
 
@@ -60,6 +60,7 @@ export async function signUpAction(
   _prev: AuthState,
   formData: FormData,
 ): Promise<AuthState> {
+  const db = getDb();
   const parsed = signUpSchema.safeParse({
     name: formData.get("name"),
     company: formData.get("company"),
@@ -98,6 +99,7 @@ export async function signInAction(
   _prev: AuthState,
   formData: FormData,
 ): Promise<AuthState> {
+  const db = getDb();
   const parsed = signInSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
