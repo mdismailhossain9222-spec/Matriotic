@@ -54,21 +54,31 @@ export default function Preloader() {
         setPhase("exiting");
       }, exitAt),
       window.setTimeout(() => {
-        unlockScroll();
-        setPhase("gone");
+        try {
+          unlockScroll();
+        } finally {
+          setPhase("gone");
+        }
       }, goneAt),
       // failsafe: always leave in under 4s, even if timers misbehave
       window.setTimeout(() => {
         announceDone();
-        unlockScroll();
-        setPhase("gone");
+        try {
+          unlockScroll();
+        } finally {
+          setPhase("gone");
+        }
       }, 3900),
     );
 
     return () => {
       timers.current.forEach((t) => window.clearTimeout(t));
       timers.current = [];
-      unlockScroll();
+      try {
+        unlockScroll();
+      } finally {
+        // no-op: component unmount cleanup
+      }
     };
   }, [announceDone]);
 
@@ -86,7 +96,7 @@ export default function Preloader() {
 
   return (
     <div
-      className={`preloader ${phase === "exiting" ? "pl-exit" : ""}`}
+      className={`preloader gpu ${phase === "exiting" ? "pl-exit" : ""}`}
       role="status"
       aria-label="Welcome to Matriotic Studios"
     >

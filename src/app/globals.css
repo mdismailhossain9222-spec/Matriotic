@@ -117,17 +117,6 @@ body {
   overscroll-behavior-y: none;
 }
 
-/* iOS-specific viewport */
-@media (max-width: 768px) {
-  [style*="transform"],
-  [class*="motion"] {
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-}
-
 /* touch devices: kill transform-heavy hover effects that "stick" after tap */
 @media (hover: none) {
   .group\:hover-zoom .group:hover .zoom-el,

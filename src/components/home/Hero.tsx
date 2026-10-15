@@ -12,18 +12,6 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 const WORDS = ["Digital", "experiences", "with"];
 
-function useDesktop() {
-  const [desktop, setDesktop] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const on = () => setDesktop(mq.matches);
-    on();
-    mq.addEventListener("change", on);
-    return () => mq.removeEventListener("change", on);
-  }, []);
-  return desktop;
-}
-
 /**
  * Scroll-driven hero shell — mounted ONLY on desktop so phones never run
  * useScroll listeners, springs, or per-frame style writes. The component
@@ -31,7 +19,7 @@ function useDesktop() {
  * with identical geometry, so it is not visible.
  */
 function HeroBackdrop({ animated, children }: { animated: boolean; children: React.ReactNode }) {
-  return <div className="absolute inset-0 -z-10">{animated ? <BackdropDrift animated={animated}>{children}</BackdropDrift> : children}</div>;
+  return <div className="absolute inset-0 -z-10 gpu">{animated ? <BackdropDrift animated={animated}>{children}</BackdropDrift> : children}</div>;
 }
 
 function BackdropDrift({ animated, children }: { animated: boolean; children: React.ReactNode }) {
@@ -67,13 +55,12 @@ function ContentDrift({ children }: { children: React.ReactNode }) {
 
 export default function Hero() {
   const reduce = useReducedMotion();
-  const desktop = useDesktop();
   const scrollEnabled = useScrollAnimation();
   const [ready, setReady] = useState(false);
 
   // Determine if we should use scroll-driven animations
   // Only on desktop with fine pointer (not mobile, not touch devices)
-  const isScrollEnabled = desktop && scrollEnabled && !reduce;
+  const isScrollEnabled = scrollEnabled && !reduce;
 
   useEffect(() => {
     if (window.__msPreloaderDone) {
