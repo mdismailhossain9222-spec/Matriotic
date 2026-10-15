@@ -26,7 +26,7 @@ export function Reveal({
   return (
     <MotionTag
       className={className}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y }}
+      initial={reduce ? { opacity: 0, y: 0 } : { opacity: 1 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once, margin: "-12% 0px -12% 0px" }}
       transition={{ duration: 0.9, delay, ease: EASE }}
@@ -42,7 +42,7 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 22 },
+  hidden: { opacity: 1, y: 0 },
   show: {
     opacity: 1,
     y: 0,
@@ -121,12 +121,16 @@ export function SplitHeading({
       <span className="sr-only">{text}</span>
       <motion.span
         aria-hidden
-        initial="hidden"
+        initial={{ opacity: reduce ? 0 : 1, y: reduce ? undefined : "110%" }}
         whileInView="show"
         viewport={{ once: true, margin: "-12% 0px" }}
         variants={{
-          hidden: {},
-          show: { transition: { staggerChildren: 0.055, delayChildren: delay } },
+          hidden: { opacity: 0, y: "110%" },
+          show: {
+            y: "0%",
+            opacity: 1,
+            transition: { duration: 0.95, ease: EASE },
+          },
         }}
         className="inline"
       >
@@ -139,7 +143,7 @@ export function SplitHeading({
                   : "inline-block pr-[0.26em]"
               }
               variants={{
-                hidden: reduce ? { opacity: 0 } : { y: "110%", opacity: 0 },
+                hidden: { opacity: 0, y: "110%" },
                 show: {
                   y: "0%",
                   opacity: 1,

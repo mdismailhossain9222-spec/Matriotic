@@ -53,8 +53,7 @@ export default function CaseStudy(props: Props) {
   const { id, name, tagline, category, year, thumbnail, alt, description, highlights, tech, url, index } = props;
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const flip = index % 2 === 1;
-  const desktop = useDesktop();
+  const desktop = typeof window !== "undefined" && window.innerWidth >= 768;
   // parallax is desktop-only: iOS Safari breaks background-attachment-style
   // scroll-linked transforms and they cost frames on Android
   const parallaxActive = !reduce && desktop;
@@ -67,7 +66,7 @@ export default function CaseStudy(props: Props) {
     >
       <div className="u-container flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
         {/* Image with curtain reveal - now clickable to open live URL */}
-        <div className={`flex-0-0 flex-[0_0_55%] ${flip ? "flex-row-reverse" : "flex-row"} lg:order-2`}>
+        <div className={`flex-0-0 flex-[0_0_55%] lg:order-2`}>
           <a
             href={url}
             target="_blank"
@@ -116,7 +115,7 @@ export default function CaseStudy(props: Props) {
         </div>
 
         {/* Copy */}
-        <div className={`flex-1 ${flip ? "flex-row-reverse" : "flex-row"} lg:order-1`}>
+        <div className={`flex-1 lg:order-1`}>
           <motion.div
             initial="hidden"
             whileInView="show"

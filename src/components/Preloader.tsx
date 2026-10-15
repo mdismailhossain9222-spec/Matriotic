@@ -50,8 +50,11 @@ export default function Preloader() {
 
     timers.current.push(
       window.setTimeout(() => {
-        announceDone(); // hero entrance starts with the reveal
-        setPhase("exiting");
+        try {
+          announceDone();
+        } finally {
+          setPhase("exiting");
+        }
       }, exitAt),
       window.setTimeout(() => {
         try {
@@ -62,12 +65,12 @@ export default function Preloader() {
       }, goneAt),
       // failsafe: always leave in under 4s, even if timers misbehave
       window.setTimeout(() => {
-        announceDone();
         try {
-          unlockScroll();
+          announceDone();
         } finally {
           setPhase("gone");
         }
+        unlockScroll();
       }, 3900),
     );
 

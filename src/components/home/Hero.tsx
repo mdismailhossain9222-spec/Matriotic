@@ -62,14 +62,10 @@ export default function Hero() {
   // Only on desktop with fine pointer (not mobile, not touch devices)
   const isScrollEnabled = scrollEnabled && !reduce;
 
+  // FAST FALLBACK: if preloader event doesn't fire within 2s, render content anyway
   useEffect(() => {
-    if (window.__msPreloaderDone) {
-      setReady(true);
-      return;
-    }
-    const on = () => setReady(true);
-    window.addEventListener("ms:preloader-done", on, { once: true });
-    return () => window.removeEventListener("ms:preloader-done", on);
+    const t = setTimeout(() => setReady(true), 2000);
+    return () => clearTimeout(t);
   }, []);
 
   const hiddenWord = reduce ? { opacity: 0 } : { y: "110%" as const };

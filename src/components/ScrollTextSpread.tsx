@@ -70,12 +70,43 @@ type Props = {
 };
 
 export function ScrollTextSpread({ text, subtitle, className }: Props) {
+  const desktop = typeof window !== "undefined" && window.innerWidth >= 768;
+  const reduceMotion = useReducedMotion();
+
+  // On mobile, render text statically — always visible, no transform animation
+  if (!desktop) {
+    const chars = text.split("");
+    return (
+      <section
+        className={joinClass(
+          "relative box-border flex h-[140vh] sm:h-[160vh] items-center justify-center overflow-hidden bg-transparent px-4",
+          className
+        )}
+      >
+        <div className="w-full max-w-5xl text-center">
+          {subtitle && (
+            <p className="mb-6 text-xs sm:text-sm uppercase tracking-[0.2em] text-gold-soft/70">
+              {subtitle}
+            </p>
+          )}
+          <div className="u-display uppercase text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight">
+            {chars.map((char, i) => (
+              <span key={i} className="inline-block pr-1">
+                {char}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Desktop: original scroll-driven animation
   const targetRef = useRef<HTMLDivElement | null>(null);
-  const desktop = useDesktop();
-  const reduceMotion = useReducedMotion() ?? false;
+  const reduce = useReducedMotion() ?? false;
   // Touch devices spread characters less — keeps the effect legible without
   // pushing content off-screen on narrow viewports.
-  const spread = desktop ? 50 : 30;
+  const spread = 50;
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -110,7 +141,7 @@ export function ScrollTextSpread({ text, subtitle, className }: Props) {
               index={index}
               centerIndex={centerIndex}
               scrollYProgress={scrollYProgress}
-              reduceMotion={reduceMotion}
+              reduceMotion={reduce}
               spread={spread}
             />
           ))}
