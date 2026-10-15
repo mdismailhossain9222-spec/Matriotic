@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -17,7 +17,7 @@ function useDesktop() {
   return desktop;
 }
 
-/** Scroll-linked image drift — mounted only on desktop. */
+/** Scroll-linked image drift - mounted only on desktop. */
 function DriftImage({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });

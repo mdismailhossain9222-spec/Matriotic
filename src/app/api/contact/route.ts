@@ -11,7 +11,7 @@ const schema = z.object({
   company: z.string().trim().max(160).optional().default(""),
   budget: z.string().trim().max(60).optional().default(""),
   service: z.string().trim().max(80).optional().default(""),
-  message: z.string().trim().min(20, "Tell us a little more — 20 characters minimum.").max(5000),
+  message: z.string().trim().min(20, "Tell us a little more - 20 characters minimum.").max(5000),
   // honeypot
   website: z.string().max(0).optional().default(""),
 });

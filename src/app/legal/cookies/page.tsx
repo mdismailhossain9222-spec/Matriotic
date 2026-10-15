@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import LegalShell, { type LegalSection } from "@/components/legal/LegalShell";
 import CookieTable from "@/components/legal/CookieTable";
 
@@ -74,7 +74,7 @@ export default function CookiesPage() {
         eyebrow="Legal"
         title="Cookie Policy"
         updated="12 January 2026"
-        lede="A complete, honest inventory of every cookie this site can set — and a one-click way to change your mind."
+        lede="A complete, honest inventory of every cookie this site can set - and a one-click way to change your mind."
         sections={SECTIONS}
       />
       <CookieTable />

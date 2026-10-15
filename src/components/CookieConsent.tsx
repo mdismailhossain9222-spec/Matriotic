@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -78,7 +78,7 @@ export default function CookieConsent() {
             <h2 className="u-display mt-4 text-xl text-white">A matter of consent.</h2>
             <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-white/60">
               We use essential cookies to run this site and optional ones to understand how it
-              performs. You choose — and you can change your mind anytime. Read our{" "}
+              performs. You choose - and you can change your mind anytime. Read our{" "}
               <Link href="/legal/cookies" className="text-gold underline-offset-4 hover:underline">
                 Cookie Policy
               </Link>

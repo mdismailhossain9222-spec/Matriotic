@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -9,7 +9,7 @@ import { getCurrentUser } from "@/lib/auth";
 export const metadata: Metadata = {
   title: "Client Portal",
   description:
-    "Secure sign-in for Matriotic Studios clients — track project progress, milestones and deliverables.",
+    "Secure sign-in for Matriotic Studios clients - track project progress, milestones and deliverables.",
   robots: { index: false, follow: false },
 };
 
@@ -52,7 +52,7 @@ export default async function PortalPage() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-white/60">
-              Clients of Matriotic Studios get a private dashboard — no status-update
+              Clients of Matriotic Studios get a private dashboard - no status-update
               emails, no guessing. Everything we are doing, visible as we do it.
             </p>
           </Reveal>
@@ -76,7 +76,7 @@ export default async function PortalPage() {
               <p className="mt-3 text-sm leading-relaxed text-white/70">
                 Reviewing the portal? Sign in with{" "}
                 <span className="font-mono text-white">demo@matrioticstudios.com</span> /{" "}
-                <span className="font-mono text-white">MatrioticDemo2026</span> — or create
+                <span className="font-mono text-white">MatrioticDemo2026</span> - or create
                 your own account.
               </p>
             </div>

@@ -1,9 +1,9 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import BrandLogo from "./BrandLogo";
 
 export default function Logo({ compact = false }: { compact?: boolean }) {
   return (
-    <Link href="/" aria-label="Matriotic Studios LLC — home" className="group flex items-center gap-3.5">
+    <Link href="/" aria-label="Matriotic Studios LLC - home" className="group flex items-center gap-3.5">
       <BrandLogo
         lockup="icon"
         className="h-11 w-auto shrink-0 transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.04]"

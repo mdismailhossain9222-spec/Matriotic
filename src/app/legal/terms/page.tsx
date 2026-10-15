@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import LegalShell, { type LegalSection } from "@/components/legal/LegalShell";
 
 export const metadata: Metadata = {
@@ -121,7 +121,7 @@ export default function TermsPage() {
       eyebrow="Legal"
       title="Terms of Service"
       updated="12 January 2026"
-      lede="The commercial and legal framework for working with Matriotic Studios — written to be read, not skimmed past."
+      lede="The commercial and legal framework for working with Matriotic Studios - written to be read, not skimmed past."
       sections={SECTIONS}
     />
   );

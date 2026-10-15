@@ -10,13 +10,13 @@ import { PRICING, ADDONS } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Transparent starting-from pricing for custom-coded websites â€” Starter, Professional and Enterprise. Final quote depends on scope.",
+    "Transparent starting-from pricing for custom-coded websites - Starter, Professional and Enterprise. Final quote depends on scope.",
 };
 
 const FAQS = [
   {
     q: "What are the payment terms?",
-    a: "50% to reserve your slot and start discovery, 50% on delivery before go-live. That's it â€” no hourly surprises.",
+    a: "50% to reserve your slot and start discovery, 50% on delivery before go-live. That's it - no hourly surprises.",
   },
   {
     q: "Who owns the website?",
@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     q: "Are hosting and domain included?",
-    a: "No â€” hosting and domain costs are not included and are billed directly by the provider of your choice. We'll happily set everything up for you.",
+    a: "No - hosting and domain costs are not included and are billed directly by the provider of your choice. We'll happily set everything up for you.",
   },
   {
     q: "How do revisions work?",
@@ -40,7 +40,7 @@ export default function PricingPage() {
         eyebrow="Investment"
         title="Honest pricing, published in advance."
         accentFrom={3}
-        lede="Every website is custom-coded by senior developers â€” React/Next.js, Node.js, custom or headless CMS. No page builders, no templates, no bloat."
+        lede="Every website is custom-coded by senior developers - React/Next.js, Node.js, custom or headless CMS. No page builders, no templates, no bloat."
       />
 
       {/* â”€â”€ Tiers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
@@ -129,7 +129,7 @@ export default function PricingPage() {
               </p>
               <p className="text-xs leading-relaxed text-mist">
                 All prices in USD. We build with real developers using custom code
-                (React/Next.js, Node.js, custom CMS or headless CMS) â€” not WordPress or page
+                (React/Next.js, Node.js, custom CMS or headless CMS) - not WordPress or page
                 builders.
               </p>
             </div>

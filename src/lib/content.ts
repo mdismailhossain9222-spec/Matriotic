@@ -23,7 +23,7 @@ export const SERVICES = [
     title: "UI/UX Design",
     tagline: "Taste, applied with discipline.",
     description:
-      "Interfaces shaped by research and refined to the pixel. We design systems, not screens — typography, motion and spacing that hold up everywhere.",
+      "Interfaces shaped by research and refined to the pixel. We design systems, not screens - typography, motion and spacing that hold up everywhere.",
     deliverables: [
       "Discovery & user research",
       "Information architecture",

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import LegalShell, { type LegalSection } from "@/components/legal/LegalShell";
 
 export const metadata: Metadata = {

@@ -10,7 +10,7 @@ import { PROCESS } from "@/lib/content";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "The story of Matriotic Studios LLC — a deliberately small studio obsessed with craft, performance and the details nobody asks for.",
+    "The story of Matriotic Studios LLC - a deliberately small studio obsessed with craft, performance and the details nobody asks for.",
 };
 
 const VALUES = [
@@ -135,7 +135,7 @@ export default function AboutPage() {
             <Reveal delay={0.2}>
               <p className="mt-7 text-lg leading-relaxed text-white/60">
                 Every brand deserves a digital presence that matches the care it puts into
-                its product. Our mission is to close that gap — with engineering rigour,
+                its product. Our mission is to close that gap - with engineering rigour,
                 editorial design sensibility, and an allergy to anything generic.
               </p>
             </Reveal>

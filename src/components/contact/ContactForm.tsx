@@ -13,7 +13,7 @@ const SERVICES = [
   "Not sure yet",
 ];
 
-const BUDGETS = ["Under $1k", "$1k â€“ $3k", "$3k â€“ $5k", "$5k+", "Not sure yet"];
+const BUDGETS = ["Under $1k", "$1k - $3k", "$3k - $5k", "$5k+", "Not sure yet"];
 
 type Fields = {
   name: string;
@@ -41,7 +41,7 @@ function validate(values: Fields) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim()))
     errors.email = "Please enter a valid email address.";
   if (values.message.trim().length < 20)
-    errors.message = "Tell us a little more â€” 20 characters minimum.";
+    errors.message = "Tell us a little more - 20 characters minimum.";
   return errors;
 }
 
@@ -105,7 +105,7 @@ export default function ContactForm() {
         </span>
         <h3 className="u-display mt-8 text-3xl text-white">Message received.</h3>
         <p className="mt-4 max-w-md leading-relaxed text-mist">
-          Thank you â€” your enquiry is with us. A senior member of the studio will reply
+          Thank you - your enquiry is with us. A senior member of the studio will reply
           within one business day, usually sooner.
         </p>
         <button

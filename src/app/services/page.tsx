@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Check } from "lucide-react";
 
 import PageHero from "@/components/PageHero";
@@ -10,7 +10,7 @@ import { SERVICES } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Custom web development, UI/UX design, search optimisation and website maintenance — delivered by a senior-only studio.",
+    "Custom web development, UI/UX design, search optimisation and website maintenance - delivered by a senior-only studio.",
 };
 
 const ENGAGEMENT = [
@@ -24,7 +24,7 @@ const ENGAGEMENT = [
   },
   {
     title: "Partnership",
-    body: "Embedded, long-term collaboration — we act as your product and web team, quarter after quarter.",
+    body: "Embedded, long-term collaboration - we act as your product and web team, quarter after quarter.",
   },
 ];
 
@@ -36,7 +36,7 @@ export default function ServicesPage() {
         eyebrow="Capabilities"
         title="Everything required to launch something exceptional."
         accentFrom={4}
-        lede="Four tightly connected disciplines. We rarely sell them in isolation — the work is strongest when strategy, design, engineering and growth are decided in the same room."
+        lede="Four tightly connected disciplines. We rarely sell them in isolation - the work is strongest when strategy, design, engineering and growth are decided in the same room."
       />
 
       <div className="relative">

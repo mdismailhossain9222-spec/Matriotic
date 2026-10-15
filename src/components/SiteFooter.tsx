@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import BrandLogo from "./BrandLogo";
 import { SOCIAL_LINKS, SOCIAL_PROPS } from "./SocialIcons";
 import NewsletterForm from "./NewsletterForm";
@@ -43,7 +43,7 @@ export default function SiteFooter() {
       <div className="u-container relative py-20 md:py-24">
         <div className="grid gap-14 lg:grid-cols-[1.4fr_2fr]">
           <div>
-            <Link href="/" aria-label="Matriotic Studios LLC — home" className="inline-block">
+            <Link href="/" aria-label="Matriotic Studios LLC - home" className="inline-block">
               <BrandLogo className="h-auto w-44" />
             </Link>
             <p className="mt-7 max-w-sm text-[0.9375rem] leading-relaxed text-mist">

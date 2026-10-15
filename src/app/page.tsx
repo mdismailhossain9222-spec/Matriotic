@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Quote } from "lucide-react";
 
@@ -62,7 +62,7 @@ export default function HomePage() {
                 <StaggerItem>
                   <p className="leading-relaxed text-mist">
                     We work with a handful of clients each quarter so that every detail
-                    receives the time it deserves — the kerning of a headline, the easing
+                    receives the time it deserves - the kerning of a headline, the easing
                     curve of a hover, the 40 kilobytes we refused to ship. It is a slower
                     way to work. It is also the only way we know how to produce something
                     genuinely rare.

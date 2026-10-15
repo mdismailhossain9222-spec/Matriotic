@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion, type MotionValue } from "motion/react";
@@ -21,7 +21,7 @@ function useDesktopFx() {
 
 /**
  * Scroll-reactive orbit rings.
- * On touch/mobile the animated child is NOT mounted at all — a static SVG is
+ * On touch/mobile the animated child is NOT mounted at all - a static SVG is
  * rendered instead, so there are zero scroll listeners, zero springs, zero rAF.
  */
 export function OrbitRings({ className = "" }: { className?: string }) {
@@ -102,7 +102,7 @@ function RingsSvg({
   );
 }
 
-/** Wireframe prism — desktop-only, hidden below lg by its className anyway. */
+/** Wireframe prism - desktop-only, hidden below lg by its className anyway. */
 export function WirePrism({ className = "" }: { className?: string }) {
   const active = useDesktopFx();
   return (
@@ -146,7 +146,7 @@ function PrismSvg({
   );
 }
 
-/** Morphing dashed arcs — ambient rotation is desktop-only. */
+/** Morphing dashed arcs - ambient rotation is desktop-only. */
 export function ArcCluster({ className = "" }: { className?: string }) {
   const active = useDesktopFx();
   return (
@@ -192,7 +192,7 @@ export function GuideLines({ count = 5, className = "" }: { count?: number; clas
   );
 }
 
-/** Parallax wrapper — desktop: scroll-linked y; mobile: plain wrapper, no hooks. */
+/** Parallax wrapper - desktop: scroll-linked y; mobile: plain wrapper, no hooks. */
 export function Parallax({
   children,
   distance = 70,
