@@ -54,7 +54,7 @@ export default function SiteHeader({ signedIn }: { signedIn: boolean }) {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-        className={`site-header fixed inset-x-0 top-0 z-[100] transition-all duration-500 ${
+        className={`site-header fixed inset-x-0 top-0 z-[100] transition-transform duration-500 ${
           scrolled || open
             ? "u-glass border-b border-white/[0.07] py-3"
             : "border-b border-transparent py-5"

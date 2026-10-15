@@ -61,16 +61,21 @@ export function Stagger({
   delay?: number;
   once?: boolean;
 }) {
+  const reduce = useReducedMotion();
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+  const staggerDuration = reduce || isMobile ? 0.04 : 0.075;
+
   return (
     <motion.div
       className={className}
       variants={{
         hidden: {},
-        show: { transition: { staggerChildren: 0.075, delayChildren: delay } },
+        show: { transition: { staggerChildren: staggerDuration, delayChildren: delay } },
       }}
       initial="hidden"
       whileInView="show"
-      viewport={{ once, margin: "-10% 0px -10% 0px" }}
+      viewport={{ once, margin: "-10% 0px -10% 0px", amount: 0.3 }}
     >
       {children}
     </motion.div>

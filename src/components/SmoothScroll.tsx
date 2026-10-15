@@ -10,7 +10,11 @@ export default function SmoothScroll() {
     const coarse = window.matchMedia("(pointer: coarse)").matches;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const narrow = window.matchMedia("(max-width: 767px)").matches;
-    if (coarse || reduced || narrow) return;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const isTouchDevice =
+      !finePointer || 'ontouchstart' in window;
+
+    if (isTouchDevice || coarse || reduced || narrow) return;
 
     const lenis = new Lenis({
       duration: 1.15,
