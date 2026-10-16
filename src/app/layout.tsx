@@ -67,7 +67,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const user = await getCurrentUser();
 
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${inter.variable}`}>
       <body className="bg-obsidian text-white antialiased">
         {/* Pre-paint: theme + preloader skip/scroll-lock + DOM-level 4s failsafe (works even if the framework fails) */}
         <script

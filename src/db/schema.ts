@@ -5,8 +5,10 @@ import {
   timestamp,
   varchar,
   integer,
+  boolean,
   index,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const users = pgTable(
   "users",
@@ -15,7 +17,9 @@ export const users = pgTable(
     email: varchar("email", { length: 255 }).notNull().unique(),
     name: varchar("name", { length: 120 }).notNull(),
     company: varchar("company", { length: 160 }),
-    passwordHash: text("password_hash").notNull(),
+    // NULL for OAuth-only accounts (Google / Facebook), which never set a
+    // password. Password sign-in is rejected for these rows.
+    passwordHash: text("password_hash"),
     // Role: 'user' for everyone. 'admin' is granted manually after a verified
     // Google login — never in a migration, never by email string match alone.
     role: varchar("role", { length: 16 }).notNull().default("user"),
@@ -23,9 +27,9 @@ export const users = pgTable(
     // email/password signups (no verification flow yet) and for OAuth providers
     // that did not return a verified email.
     emailVerified: timestamp("email_verified", { withTimezone: true }),
-    // JSON of linked OAuth providers, e.g.
-    // {"google":{"sub":"...","verified_at":"..."},"facebook":{"sub":"...","verified_at":"..."}}
-    providers: text("providers"),
+    // Linked OAuth providers as a Postgres text array, e.g. ["google"].
+    // NULL for email/password accounts that never used OAuth.
+    providers: text("providers").array().default(sql`ARRAY[]::text[]`),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   },
   (t) => [index("users_email_idx").on(t.email)],
@@ -93,9 +97,10 @@ export const loginEvents = pgTable(
     // Nullable + SET NULL: a user row being deleted must not cascade-delete the
     // audit trail. user_id matches users.id type exactly (integer).
     userId: integer("user_id").references(() => users.id, { onDelete: "set null" }),
-    name: varchar("name", { length: 120 }).notNull(),
+    name: varchar("name", { length: 120 }),
     email: varchar("email", { length: 255 }).notNull(),
     provider: varchar("provider", { length: 16 }).notNull(), // google | facebook | email
+    success: boolean("success").notNull().default(true),
     ip: varchar("ip", { length: 64 }),
     userAgent: text("user_agent"),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
@@ -105,6 +110,21 @@ export const loginEvents = pgTable(
     index("login_events_created_idx").on(t.createdAt),
     index("login_events_provider_idx").on(t.provider),
   ],
+);
+
+export const oauthStates = pgTable(
+  "oauth_states",
+  {
+    id: serial("id").primaryKey(),
+    nonce: varchar("nonce", { length: 64 }).notNull().unique(),
+    provider: varchar("provider", { length: 16 }).notNull(), // google | facebook
+    redirect: text("redirect").notNull(),
+    // PKCE code_verifier for Google flows. NULL for Facebook (which does not
+    // use PKCE). Stored so the callback can validate the challenge.
+    codeVerifier: text("code_verifier"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [index("oauth_states_nonce_idx").on(t.nonce), index("oauth_states_created_idx").on(t.createdAt)],
 );
 
 export type User = typeof users.$inferSelect;

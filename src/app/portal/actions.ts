@@ -137,7 +137,7 @@ export async function signInAction(
   }
 
   const { email, password } = parsed.data;
-  let record: { id: number; passwordHash: string } | undefined;
+  let record: { id: number; passwordHash: string | null } | undefined;
   try {
     [record] = await db
       .select({ id: users.id, passwordHash: users.passwordHash })
@@ -149,8 +149,9 @@ export async function signInAction(
     return { error: "We could not check your credentials. Please try again." };
   }
 
-  if (!record) {
-    // Don't reveal whether the account exists — same message either way.
+  if (!record || !record.passwordHash) {
+    // OAuth-only accounts (Google) have no password_hash — password sign-in
+    // is rejected for them. Don't reveal whether the account exists.
     return { error: "Those credentials do not match our records." };
   }
 

@@ -88,6 +88,8 @@ export default function AuthPanel() {
           >
             {mode === "signin" ? (
               <form action={signIn} className="mt-9 space-y-7">
+                <SocialButtons />
+                <Divider />
                 <Labelled label="Email" htmlFor="si-email">
                   <input
                     id="si-email"
@@ -134,6 +136,8 @@ export default function AuthPanel() {
                     className={fieldClass}
                   />
                 </Labelled>
+                <SocialButtons />
+                <Divider />
                 <Labelled label="Email" htmlFor="su-email">
                   <input
                     id="su-email"
@@ -199,6 +203,60 @@ function Labelled({
       <div className="mt-1.5">{children}</div>
       {hint && <p className="mt-2 text-[0.6875rem] text-white/30">{hint}</p>}
     </div>
+  );
+}
+
+function SocialButtons() {
+  return (
+    <div className="space-y-3">
+      <a
+        href="/api/auth/google"
+        className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full border border-gold bg-transparent px-7 py-4 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-gold transition-opacity hover:bg-gold/[0.08]"
+      >
+        <GoogleLogo />
+        <span>Continue with Google</span>
+      </a>
+    </div>
+  );
+}
+
+function Divider() {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="h-px flex-1 bg-white/10" />
+      <span className="text-xs text-white/40">or</span>
+      <div className="h-px flex-1 bg-white/10" />
+    </div>
+  );
+}
+
+function GoogleLogo() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M23.52 12.073c0-.82-.073-1.61-.21-2.39H12v4.53h6.58c-.29 1.55-1.17 2.86-2.49 3.74v3.1h4.04C22.8 18.69 23.52 15.68 23.52 12.07z"
+        fill="#4285F4"
+      />
+      <path
+        d="M12 24.5c3.36 0 6.19-1.11 8.25-3.02l-4.04-3.1c-1.12.76-2.56 1.2-3.72 1.2-2.87 0-5.31-1.93-6.18-4.53H1.73v3.23C3.8 22.45 7.6 24.5 12 24.5z"
+        fill="#34A853"
+      />
+      <path
+        d="M5.82 14.65c-.24-.72-.37-1.49-.37-2.28s.13-1.56.37-2.28V6.86H1.73c-.46.89-.73 1.9-.73 2.97s.27 2.08.73 2.97v3.23z"
+        fill="#FBBC05"
+      />
+      <path
+        d="M17.82 6.86 15.84 8.34c-.79-.72-1.8-1.17-2.84-1.17-2.16 0-4.02 1.22-4.94 3.04L5.82 12.37c.86 1.6 2.6 2.72 4.7 2.72 1.6 0 3.06-.53 4.18-1.44l3.1-2.42z"
+        fill="#EA4335"
+      />
+    </svg>
   );
 }
 

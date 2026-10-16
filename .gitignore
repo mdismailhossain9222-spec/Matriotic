@@ -16,3 +16,7 @@ coverage/
 # Local scratch / unrelated embedded repos
 .scratch/
 harvey/
+
+pwtest.txt
+
+*.pwtest*

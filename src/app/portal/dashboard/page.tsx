@@ -5,7 +5,7 @@ import { AlertCircle, ArrowUpRight, CalendarDays, LogOut } from "lucide-react";
 
 import { db } from "@/db";
 import { projects } from "@/db/schema";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser, type SessionUser } from "@/lib/auth";
 import { signOutAction } from "../actions";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 import ProgressBar from "@/components/portal/ProgressBar";
@@ -71,17 +71,20 @@ export default async function DashboardPage() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.18}>
-            <form action={signOutAction}>
-              <button
-                type="submit"
-                className="inline-flex items-center gap-2.5 rounded-full border border-white/12 px-5 py-3 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-white/70 transition-colors duration-500 hover:border-gold/50 hover:text-gold"
-              >
-                <LogOut className="h-3.5 w-3.5" strokeWidth={1.6} />
-                Sign out
-              </button>
-            </form>
-          </Reveal>
+          <div className="flex flex-col items-end gap-5">
+            <ProfileBlock user={user} />
+            <Reveal delay={0.18}>
+              <form action={signOutAction}>
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-2.5 rounded-full border border-white/12 px-5 py-3 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-white/70 transition-colors duration-500 hover:border-gold/50 hover:text-gold"
+                >
+                  <LogOut className="h-3.5 w-3.5" strokeWidth={1.6} />
+                  Sign out
+                </button>
+              </form>
+            </Reveal>
+          </div>
         </div>
 
         {/* Summary strip */}
@@ -176,5 +179,31 @@ export default async function DashboardPage() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/**
+ * Small profile block shown top-right of the dashboard header.
+ *
+ * Reuses the SessionUser shape from src/lib/auth — no new DB columns, no new
+ * dependencies. The avatar is a gold circle with the first letter of the
+ * user's name (falling back to the email prefix, then "?").
+ */
+function ProfileBlock({ user }: { user: SessionUser }) {
+  const label = (user.name?.trim() || user.email.split("@")[0] || "?")
+    .trim()
+    .charAt(0)
+    .toUpperCase();
+
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold text-sm font-semibold text-on-gold">
+        {label}
+      </div>
+      <div className="leading-tight">
+        <p className="text-sm font-semibold text-white">{user.name}</p>
+        <p className="text-xs text-mist">{user.email}</p>
+      </div>
+    </div>
   );
 }
