@@ -67,5 +67,14 @@ export const consentLogs = pgTable("consent_logs", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
+export const emailOutbox = pgTable("email_outbox", {
+  id: serial("id").primaryKey(),
+  idempotencyKey: varchar("idempotency_key", { length: 128 }).notNull().unique(),
+  status: varchar("status", { length: 16 }).notNull().default("pending"), // pending | sent
+  resendId: varchar("resend_id", { length: 128 }),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  sentAt: timestamp("sent_at", { withTimezone: true }),
+});
+
 export type User = typeof users.$inferSelect;
 export type Project = typeof projects.$inferSelect;

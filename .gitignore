@@ -13,3 +13,6 @@ dist/
 coverage/
 .vercel
 .env*
+# Local scratch / unrelated embedded repos
+.scratch/
+harvey/

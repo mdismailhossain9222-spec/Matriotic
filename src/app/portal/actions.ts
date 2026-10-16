@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { getDb } from "@/db";
+import { db } from "@/db";
 import { users, projects } from "@/db/schema";
 import { createSession, destroySession, hashPassword, verifyPassword } from "@/lib/auth";
 
@@ -60,7 +60,6 @@ export async function signUpAction(
   _prev: AuthState,
   formData: FormData,
 ): Promise<AuthState> {
-  const db = getDb();
   const parsed = signUpSchema.safeParse({
     name: formData.get("name"),
     company: formData.get("company"),
@@ -74,24 +73,53 @@ export async function signUpAction(
 
   const { name, email, password, company } = parsed.data;
 
-  const existing = await db.select({ id: users.id }).from(users).where(eq(users.email, email)).limit(1);
+  let existing: { id: number }[];
+  try {
+    existing = await db.select({ id: users.id }).from(users).where(eq(users.email, email)).limit(1);
+  } catch (err) {
+    console.error("[auth] signUp lookup failed:", err);
+    return { error: "We could not check for an existing account. Please try again." };
+  }
   if (existing.length > 0) {
     return { error: "An account with that email already exists. Try signing in." };
   }
 
-  const passwordHash = await hashPassword(password);
-  const [created] = await db
-    .insert(users)
-    .values({ name, email, company: company || null, passwordHash })
-    .returning({ id: users.id });
+  let passwordHash: string;
+  try {
+    passwordHash = await hashPassword(password);
+  } catch (err) {
+    console.error("[auth] hashPassword failed:", err);
+    return { error: "We could not process your password. Please try again." };
+  }
+
+  let created: { id: number } | undefined;
+  try {
+    [created] = await db
+      .insert(users)
+      .values({ name, email, company: company || null, passwordHash })
+      .returning({ id: users.id });
+  } catch (err) {
+    console.error("[auth] signUp insert failed:", err);
+    return { error: "We could not create your account. Please try again." };
+  }
 
   if (!created) return { error: "We could not create your account. Please try again." };
 
-  await db.insert(projects).values(
-    STARTER_PROJECTS.map((p) => ({ ...p, userId: created.id })),
-  );
+  // Starter projects are best-effort — the account is still usable without them.
+  try {
+    await db.insert(projects).values(
+      STARTER_PROJECTS.map((p) => ({ ...p, userId: created.id })),
+    );
+  } catch (err) {
+    console.error("[auth] starter projects insert failed:", err);
+  }
 
-  await createSession(created.id);
+  try {
+    await createSession(created.id);
+  } catch {
+    // Session creation failed but the account exists — send them to sign in.
+    redirect("/portal");
+  }
   redirect("/portal/dashboard");
 }
 
@@ -99,7 +127,6 @@ export async function signInAction(
   _prev: AuthState,
   formData: FormData,
 ): Promise<AuthState> {
-  const db = getDb();
   const parsed = signInSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -110,17 +137,40 @@ export async function signInAction(
   }
 
   const { email, password } = parsed.data;
-  const [record] = await db
-    .select({ id: users.id, passwordHash: users.passwordHash })
-    .from(users)
-    .where(eq(users.email, email))
-    .limit(1);
+  let record: { id: number; passwordHash: string } | undefined;
+  try {
+    [record] = await db
+      .select({ id: users.id, passwordHash: users.passwordHash })
+      .from(users)
+      .where(eq(users.email, email))
+      .limit(1);
+  } catch (err) {
+    console.error("[auth] signIn lookup failed:", err);
+    return { error: "We could not check your credentials. Please try again." };
+  }
 
-  if (!record || !(await verifyPassword(password, record.passwordHash))) {
+  if (!record) {
+    // Don't reveal whether the account exists — same message either way.
     return { error: "Those credentials do not match our records." };
   }
 
-  await createSession(record.id);
+  let ok: boolean;
+  try {
+    ok = await verifyPassword(password, record.passwordHash);
+  } catch (err) {
+    console.error("[auth] verifyPassword failed:", err);
+    return { error: "We could not verify your password. Please try again." };
+  }
+
+  if (!ok) {
+    return { error: "Those credentials do not match our records." };
+  }
+
+  try {
+    await createSession(record.id);
+  } catch {
+    return { error: "We could not create your session. Please try again." };
+  }
   redirect("/portal/dashboard");
 }
 

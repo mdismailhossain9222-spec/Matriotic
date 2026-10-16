@@ -2,7 +2,7 @@ import { randomBytes, scrypt as _scrypt, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 import { cookies } from "next/headers";
 import { and, eq, gt } from "drizzle-orm";
-import { getDb } from "@/db";
+import { db } from "@/db";
 import { sessions, users } from "@/db/schema";
 
 const scrypt = promisify(_scrypt) as (
@@ -30,10 +30,14 @@ export async function verifyPassword(password: string, stored: string): Promise<
 }
 
 export async function createSession(userId: number) {
-  const db = getDb();
   const id = randomBytes(32).toString("hex");
   const expiresAt = new Date(Date.now() + SESSION_TTL_DAYS * 24 * 60 * 60 * 1000);
-  await db.insert(sessions).values({ id, userId, expiresAt });
+  try {
+    await db.insert(sessions).values({ id, userId, expiresAt });
+  } catch (err) {
+    console.error("[auth] createSession failed:", err);
+    throw new Error("We could not create your session. Please try again.");
+  }
 
   const store = await cookies();
   store.set(SESSION_COOKIE, id, {
@@ -47,11 +51,14 @@ export async function createSession(userId: number) {
 }
 
 export async function destroySession() {
-  const db = getDb();
   const store = await cookies();
   const id = store.get(SESSION_COOKIE)?.value;
   if (id) {
-    await db.delete(sessions).where(eq(sessions.id, id));
+    try {
+      await db.delete(sessions).where(eq(sessions.id, id));
+    } catch (err) {
+      console.error("[auth] destroySession failed:", err);
+    }
   }
   store.delete(SESSION_COOKIE);
 }
@@ -64,7 +71,6 @@ export type SessionUser = {
 };
 
 export async function getCurrentUser(): Promise<SessionUser | null> {
-  const db = getDb();
   const store = await cookies();
   const id = store.get(SESSION_COOKIE)?.value;
   if (!id) return null;
@@ -82,7 +88,9 @@ export async function getCurrentUser(): Promise<SessionUser | null> {
       .where(and(eq(sessions.id, id), gt(sessions.expiresAt, new Date())))
       .limit(1);
     return rows[0] ?? null;
-  } catch {
+  } catch (err) {
+    // A broken session must never break the page. Treat as logged out.
+    console.error("[auth] getCurrentUser failed:", err);
     return null;
   }
 }

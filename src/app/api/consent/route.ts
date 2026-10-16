@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { createHmac, randomBytes } from "node:crypto";
-import { getDb } from "@/db";
+import { db } from "@/db";
 import { consentLogs } from "@/db/schema";
+import { env } from "@/lib/env";
 
 export const runtime = "nodejs";
 
@@ -10,11 +11,10 @@ const SIG_COOKIE = "ms_consent_sig";
 const ONE_YEAR = 60 * 60 * 24 * 365;
 
 function secret() {
-  return process.env.CONSENT_SECRET ?? process.env.DATABASE_URL ?? "matriotic-consent";
+  return env.CONSENT_SECRET ?? "matriotic-consent";
 }
 
 export async function POST(request: Request) {
-  const db = getDb();
   let body: unknown;
   try {
     body = await request.json();
@@ -35,14 +35,15 @@ export async function POST(request: Request) {
   const value = Buffer.from(JSON.stringify(preferences)).toString("base64url");
   const signature = createHmac("sha256", secret()).update(`${token}.${value}`).digest("base64url");
 
+  // Consent logging is best-effort: a DB failure must never block the cookie.
   try {
     await db.insert(consentLogs).values({
       token,
       preferences: JSON.stringify(preferences),
       region: typeof input?.region === "string" ? input.region.slice(0, 16) : "unknown",
     });
-  } catch {
-    // consent must never block the user experience
+  } catch (err) {
+    console.error("[consent] log insert failed:", err);
   }
 
   const res = NextResponse.json({ ok: true, preferences });

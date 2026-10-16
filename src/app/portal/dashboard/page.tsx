@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { eq, asc } from "drizzle-orm";
-import { ArrowUpRight, CalendarDays, LogOut } from "lucide-react";
+import { AlertCircle, ArrowUpRight, CalendarDays, LogOut } from "lucide-react";
 
-import { getDb } from "@/db";
+import { db } from "@/db";
 import { projects } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { signOutAction } from "../actions";
@@ -19,12 +19,27 @@ export default async function DashboardPage() {
   const user = await getCurrentUser();
   if (!user) redirect("/portal");
 
-  const db = getDb();
-  const rows = await db
-    .select()
-    .from(projects)
-    .where(eq(projects.userId, user.id))
-    .orderBy(asc(projects.id));
+  let rows: {
+    id: number;
+    name: string;
+    stage: string;
+    progress: number;
+    summary: string;
+    nextMilestone: string;
+    dueDate: string;
+  }[] = [];
+  let dbError = false;
+  try {
+    rows = await db
+      .select()
+      .from(projects)
+      .where(eq(projects.userId, user.id))
+      .orderBy(asc(projects.id));
+  } catch (err) {
+    // A paused/unreachable DB must not crash the portal — degrade gracefully.
+    console.error("[dashboard] project query failed:", err);
+    dbError = true;
+  }
 
   const average =
     rows.length > 0
@@ -86,6 +101,16 @@ export default async function DashboardPage() {
         </Stagger>
 
         {/* Projects */}
+        {dbError && (
+          <div
+            role="alert"
+            className="mt-16 flex items-center gap-3 rounded-sm border border-red-500/30 bg-red-500/5 px-6 py-4 text-sm text-red-300"
+          >
+            <AlertCircle className="h-4 w-4 shrink-0" />
+            Service is temporarily unavailable — we could not load your projects right
+            now. Your data is safe; please try again in a few minutes.
+          </div>
+        )}
         <h2 className="u-display mt-16 text-2xl text-white">Your projects</h2>
 
         {rows.length === 0 ? (
