@@ -7,14 +7,14 @@ import { withRetry, isRetryable } from "@/lib/retry";
 /**
  * A pg Pool that retries `query`/`connect` on transient failures.
  *
- * Neon (and most serverless Postgres) returns a brand-new backend per
- * connection, so the first query after a cold start can fail with
- * "server closed the connection" or a timeout. Wrapping the pool means
- * every Drizzle operation — health checks, inserts, selects — gets the
- * retry behaviour instead of only the places we remember to wrap.
+ * Neon / Supabase (and most serverless Postgres) returns a brand-new backend
+ * per connection, so the first query after a cold start can fail with
+ * "server closed the connection" or a timeout. Wrapping the pool means every
+ * Drizzle operation — health checks, inserts, selects — gets the retry
+ * behaviour instead of only the places we remember to wrap.
  *
- * It is a structural superset of `pg.Pool` (same `query`/`connect` shape),
- * so it satisfies Drizzle's `NodePgClient` contract.
+ * It is a structural superset of `pg.Pool` (same `query`/`connect` shape), so
+ * it satisfies Drizzle's `NodePgClient` contract.
  */
 class RetryingPool {
   private readonly pool: Pool;
@@ -43,15 +43,26 @@ class RetryingPool {
   }
 }
 
+function isLocal(url: string): boolean {
+  return /localhost|127\.0\.0\.1|::1/.test(url);
+}
+
+// Runtime uses the transaction pooler (port 6543) when one is configured,
+// falling back to the session pooler. drizzle-kit uses DATABASE_URL directly.
+const runtimeUrl = env.DATABASE_URL_POOLED ?? env.DATABASE_URL;
+
 const poolConfig: PoolConfig = {
-  connectionString: env.DATABASE_URL,
+  connectionString: runtimeUrl,
   max: 10,
   idleTimeoutMillis: 30_000,
   connectionTimeoutMillis: 10_000,
   allowExitOnIdle: true,
-  // Neon / serverless Postgres is flaky; a bad connection shouldn't hang forever.
+  // Neon / Supabase serverless Postgres is flaky; a bad connection shouldn't
+  // hang forever, and long statements get cut off before they pile up.
   query_timeout: 15_000,
   statement_timeout: 15_000,
+  // Supabase poolers present self-signed TLS certs. Local dev has no TLS.
+  ssl: isLocal(runtimeUrl) ? undefined : { rejectUnauthorized: false },
 };
 
 export const pool = new RetryingPool(poolConfig);

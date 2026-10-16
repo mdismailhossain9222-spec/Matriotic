@@ -16,6 +16,16 @@ export const users = pgTable(
     name: varchar("name", { length: 120 }).notNull(),
     company: varchar("company", { length: 160 }),
     passwordHash: text("password_hash").notNull(),
+    // Role: 'user' for everyone. 'admin' is granted manually after a verified
+    // Google login — never in a migration, never by email string match alone.
+    role: varchar("role", { length: 16 }).notNull().default("user"),
+    // Set when a provider confirms the email address is verified. NULL for
+    // email/password signups (no verification flow yet) and for OAuth providers
+    // that did not return a verified email.
+    emailVerified: timestamp("email_verified", { withTimezone: true }),
+    // JSON of linked OAuth providers, e.g.
+    // {"google":{"sub":"...","verified_at":"..."},"facebook":{"sub":"...","verified_at":"..."}}
+    providers: text("providers"),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   },
   (t) => [index("users_email_idx").on(t.email)],
@@ -75,6 +85,27 @@ export const emailOutbox = pgTable("email_outbox", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   sentAt: timestamp("sent_at", { withTimezone: true }),
 });
+
+export const loginEvents = pgTable(
+  "login_events",
+  {
+    id: serial("id").primaryKey(),
+    // Nullable + SET NULL: a user row being deleted must not cascade-delete the
+    // audit trail. user_id matches users.id type exactly (integer).
+    userId: integer("user_id").references(() => users.id, { onDelete: "set null" }),
+    name: varchar("name", { length: 120 }).notNull(),
+    email: varchar("email", { length: 255 }).notNull(),
+    provider: varchar("provider", { length: 16 }).notNull(), // google | facebook | email
+    ip: varchar("ip", { length: 64 }),
+    userAgent: text("user_agent"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [
+    index("login_events_user_idx").on(t.userId),
+    index("login_events_created_idx").on(t.createdAt),
+    index("login_events_provider_idx").on(t.provider),
+  ],
+);
 
 export type User = typeof users.$inferSelect;
 export type Project = typeof projects.$inferSelect;
