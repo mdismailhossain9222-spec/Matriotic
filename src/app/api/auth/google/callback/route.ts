@@ -44,8 +44,8 @@ export async function GET(req: Request) {
     return fail("invalid_state");
   }
 
-  const clientId = process.env.GOOGLE_CLIENT_ID;
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const clientId = process.env.GOOGLE_CLIENT_ID?.replace(/^﻿/, "").trim();
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET?.replace(/^﻿/, "").trim();
   if (!clientId || !clientSecret) {
     return fail("missing_client_id");
   }

@@ -20,7 +20,7 @@ export async function GET(request: Request) {
     );
   }
 
-  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientId = process.env.GOOGLE_CLIENT_ID?.replace(/^﻿/, "").trim();
   if (!clientId) {
     return NextResponse.redirect(
       new URL("/portal?error=missing_client_id", request.url),
