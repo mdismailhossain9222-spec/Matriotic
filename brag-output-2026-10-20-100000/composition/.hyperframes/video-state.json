@@ -1,0 +1,268 @@
+{
+  "version": 1,
+  "historyId": "a1b3e1f8-ef54-4749-8047-c6f3bc22251f",
+  "currentRevision": "e70d3bf8-640e-455b-b96e-cd9a6e03b8d1",
+  "pendingChanges": false,
+  "files": {
+    "AGENTS.md": {
+      "hash": "1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\1d\\1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5"
+    },
+    "CLAUDE.md": {
+      "hash": "1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\1d\\1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\53\\53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "41f5a72749e5afee87b421b5034f3572d7a55f97ccb0307fb1cacfd83b4b45ec",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\41\\41f5a72749e5afee87b421b5034f3572d7a55f97ccb0307fb1cacfd83b4b45ec"
+    },
+    "meta.json": {
+      "hash": "0fcdd76636aefb09511bdf6156939a9a960fda4ff100d9d617965e289e84dac6",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\0f\\0fcdd76636aefb09511bdf6156939a9a960fda4ff100d9d617965e289e84dac6"
+    },
+    "package.json": {
+      "hash": "8ec7d97ac5b5fe69dc83c7dc5a1d829a7d579d452ebd165f8d62a6138a870458",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\8e\\8ec7d97ac5b5fe69dc83c7dc5a1d829a7d579d452ebd165f8d62a6138a870458"
+    }
+  },
+  "revisions": {
+    "41ffdc0e-e47c-4f10-b1b6-45b7894289de": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1792439028112,
+      "endedAt": 1792439028116,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\1b\\1b8a7122c4208d02b152b6767bef6cac78f54e86f04895f00326e0e94cbfda17",
+          "after": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\e8\\e8e8f88b438a6006365591dc07948e1688a37b431f08dbfef1c6b0f82fdd578a"
+        }
+      }
+    },
+    "74f3bb68-7258-4a00-945a-a60110132f96": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1792439054095,
+      "endedAt": 1792439054098,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\e8\\e8e8f88b438a6006365591dc07948e1688a37b431f08dbfef1c6b0f82fdd578a",
+          "after": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\23\\23832dfbccaec956671573ab5f711d2ce714550dbc5ee339397a32ffb6a313f6"
+        }
+      }
+    },
+    "e5702ab6-919e-4e6c-a543-564a6b1760d5": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1792439076192,
+      "endedAt": 1792439076196,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\23\\23832dfbccaec956671573ab5f711d2ce714550dbc5ee339397a32ffb6a313f6",
+          "after": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\59\\59b99f2dcc627e38c2c3aa3f6c1c8cc78de10634026d7ed62944fed94dc13d24"
+        }
+      }
+    },
+    "e70d3bf8-640e-455b-b96e-cd9a6e03b8d1": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1792439216223,
+      "endedAt": 1792439216227,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\59\\59b99f2dcc627e38c2c3aa3f6c1c8cc78de10634026d7ed62944fed94dc13d24",
+          "after": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\a1b3e1f8-ef54-4749-8047-c6f3bc22251f\\blobs\\41\\41f5a72749e5afee87b421b5034f3572d7a55f97ccb0307fb1cacfd83b4b45ec"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": "e70d3bf8-640e-455b-b96e-cd9a6e03b8d1",
+      "id": "3928f13a-f85f-445a-8046-a3a86b7e478d"
+    },
+    "revisions": {
+      "41ffdc0e-e47c-4f10-b1b6-45b7894289de": [
+        {
+          "id": "61749664-d60f-40c2-868b-05a0f24e7a60",
+          "scope": "project",
+          "metadata": {
+            "ok": false,
+            "browserSkipped": true,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 3000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1792439028214,
+          "contentHash": "88347ea60dfbe5495b259f5c55c59d03fd19cb06e6b6980a9887cdbd2e3bf85c",
+          "revision": "41ffdc0e-e47c-4f10-b1b6-45b7894289de",
+          "inputFingerprint": "f1e3ee809fc44857a589de5cb1c079a1b81e61413a89596fac556ca3a0df1205",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "cf900733-0467-4029-8179-00eb2f69adfb"
+        }
+      ],
+      "74f3bb68-7258-4a00-945a-a60110132f96": [
+        {
+          "id": "84e4cca2-4ea8-4a58-a0a0-d427bc9f81d5",
+          "scope": "project",
+          "metadata": {
+            "ok": false,
+            "browserSkipped": true,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 3000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1792439054200,
+          "contentHash": "49580576a87f41b56ccefff7de2649e2250ed015e1e81363bfbb3ef43e62d8e5",
+          "revision": "74f3bb68-7258-4a00-945a-a60110132f96",
+          "inputFingerprint": "50eff2a747d19b35ccf962a6d89fb147ce0af85afbebc6d88d926104c30579ca",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "cf900733-0467-4029-8179-00eb2f69adfb"
+        }
+      ],
+      "e5702ab6-919e-4e6c-a543-564a6b1760d5": [
+        {
+          "id": "a8551576-9d4a-40f3-8a9e-cac0137b5110",
+          "scope": "project",
+          "metadata": {
+            "ok": false,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 3000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1792439080812,
+          "contentHash": "961082d0326d19ae38c80dd8ccea902bbd5e571035dc0ec0d45be0e5f75603ee",
+          "revision": "e5702ab6-919e-4e6c-a543-564a6b1760d5",
+          "inputFingerprint": "4c5e2c6cf2bacbdf64494391329d95196e16875260b2faf962baac27d9321223",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "cf900733-0467-4029-8179-00eb2f69adfb"
+        }
+      ],
+      "e70d3bf8-640e-455b-b96e-cd9a6e03b8d1": [
+        {
+          "id": "3928f13a-f85f-445a-8046-a3a86b7e478d",
+          "scope": "project",
+          "report": "D:\\MyProjects\\MyProjects\\Matriotic\\brag-output-2026-10-20-100000\\composition\\.hyperframes\\artifacts\\checks\\3928f13a-f85f-445a-8046-a3a86b7e478d.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 3000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1792439220371,
+          "contentHash": "3e9dbc0ff92f418283e1caec8fcc47c57d0d23bd10b316ba8f7cd544a7d98340",
+          "revision": "e70d3bf8-640e-455b-b96e-cd9a6e03b8d1",
+          "inputFingerprint": "f993cb28065f0a1edc50ebf0c9594c2a1c5794d13d5abf6a79f6a912ace7e3f6",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": [
+      {
+        "id": "f2017b70-d0dc-4061-992c-ca2b4bcfaafc",
+        "scope": "project",
+        "report": "D:\\MyProjects\\MyProjects\\Matriotic\\brag-output-2026-10-20-100000\\composition\\.hyperframes\\artifacts\\checks\\f2017b70-d0dc-4061-992c-ca2b4bcfaafc.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 3000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1792438918929,
+        "contentHash": "a451d9efe4356c73baf24f47d7168e3a070beb2dcbc2d4fa9ddb85a7ddf5207e",
+        "revision": null,
+        "inputFingerprint": "b27c55a2a8595c28c428b2c492cdf5d8a5c229c79492cd669527e6e829bb38b3",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "cf900733-0467-4029-8179-00eb2f69adfb",
+      "completedAt": 1792439380255,
+      "output": "D:\\MyProjects\\MyProjects\\Matriotic\\brag-output-2026-10-20-100000\\composition\\renders\\composition_2026-10-20_01-47-09.mp4",
+      "status": "completed",
+      "revision": "e70d3bf8-640e-455b-b96e-cd9a6e03b8d1"
+    },
+    "retainedRevisions": [
+      "e70d3bf8-640e-455b-b96e-cd9a6e03b8d1"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

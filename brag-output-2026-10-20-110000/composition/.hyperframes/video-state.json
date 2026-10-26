@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "historyId": "4f2a1594-4a48-4ea6-8980-84931a8b899b",
+  "currentRevision": null,
+  "pendingChanges": false,
+  "files": {
+    "AGENTS.md": {
+      "hash": "1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\4f2a1594-4a48-4ea6-8980-84931a8b899b\\blobs\\1d\\1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5"
+    },
+    "CLAUDE.md": {
+      "hash": "1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\4f2a1594-4a48-4ea6-8980-84931a8b899b\\blobs\\1d\\1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\4f2a1594-4a48-4ea6-8980-84931a8b899b\\blobs\\53\\53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "41f5a72749e5afee87b421b5034f3572d7a55f97ccb0307fb1cacfd83b4b45ec",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\4f2a1594-4a48-4ea6-8980-84931a8b899b\\blobs\\41\\41f5a72749e5afee87b421b5034f3572d7a55f97ccb0307fb1cacfd83b4b45ec"
+    },
+    "meta.json": {
+      "hash": "7cd613bce77f4b1738475c13528c09451ad8c8030d9af5bb62c76d1f160267fe",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\4f2a1594-4a48-4ea6-8980-84931a8b899b\\blobs\\7c\\7cd613bce77f4b1738475c13528c09451ad8c8030d9af5bb62c76d1f160267fe"
+    },
+    "package.json": {
+      "hash": "8ec7d97ac5b5fe69dc83c7dc5a1d829a7d579d452ebd165f8d62a6138a870458",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\4f2a1594-4a48-4ea6-8980-84931a8b899b\\blobs\\8e\\8ec7d97ac5b5fe69dc83c7dc5a1d829a7d579d452ebd165f8d62a6138a870458"
+    },
+    "assets/music/cinematic-track.mp3": {
+      "hash": "cadd2666c5571e12fafdb21697b26aef6f196a5a9c28e708129870167679991d",
+      "content": "C:\\Users\\mdism\\.cache\\hyperframes\\history\\4f2a1594-4a48-4ea6-8980-84931a8b899b\\blobs\\ca\\cadd2666c5571e12fafdb21697b26aef6f196a5a9c28e708129870167679991d"
+    }
+  },
+  "revisions": {},
+  "checks": {
+    "latest": {
+      "revision": null,
+      "id": "8cbb9ed4-2dc6-463d-869a-3a5f73ea6b37"
+    },
+    "revisions": {},
+    "unversioned": [
+      {
+        "id": "8cbb9ed4-2dc6-463d-869a-3a5f73ea6b37",
+        "scope": "project",
+        "report": "D:\\MyProjects\\MyProjects\\Matriotic\\brag-output-2026-10-20-110000\\composition\\.hyperframes\\artifacts\\checks\\8cbb9ed4-2dc6-463d-869a-3a5f73ea6b37.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 3000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1792439754753,
+        "contentHash": "3e9dbc0ff92f418283e1caec8fcc47c57d0d23bd10b316ba8f7cd544a7d98340",
+        "revision": null,
+        "inputFingerprint": "40d0cdefd85d2d89001f5c34f4f56817f115f01af4d11bd30cd0415b4ce0bf35",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  }
+}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { and, desc, eq, gte, count } from "drizzle-orm";
+import { Zap } from "lucide-react";
 
 import { db } from "@/db";
 import { inquiries, loginEvents, users } from "@/db/schema";
@@ -117,6 +118,13 @@ export default async function AdminPage() {
           </div>
 
           <div className="flex items-center gap-4">
+            <Link
+              href="/admin/live-dashboard"
+              className="inline-flex items-center gap-2 rounded-full bg-gold/10 border border-gold/30 px-4 py-2 text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-gold hover:bg-gold/20 transition-colors"
+            >
+              <Zap className="h-3.5 w-3.5" strokeWidth={1.6} />
+              Live Outreach Dashboard
+            </Link>
             <Link
               href="/portal/dashboard"
               className="text-xs uppercase tracking-[0.14em] text-gold hover:underline"

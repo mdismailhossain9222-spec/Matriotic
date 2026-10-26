@@ -127,5 +127,60 @@ export const oauthStates = pgTable(
   (t) => [index("oauth_states_nonce_idx").on(t.nonce), index("oauth_states_created_idx").on(t.createdAt)],
 );
 
+export const leads = pgTable(
+  "leads",
+  {
+    id: serial("id").primaryKey(),
+    email: varchar("email", { length: 255 }).notNull(),
+    firstName: varchar("first_name", { length: 120 }),
+    lastName: varchar("last_name", { length: 120 }),
+    company: varchar("company", { length: 160 }),
+    title: varchar("title", { length: 120 }),
+    phone: varchar("phone", { length: 64 }),
+    linkedinUrl: varchar("linkedin_url", { length: 500 }),
+    status: varchar("status", { length: 32 }).notNull().default("New"), // New, Contacted, Replied, OptedOut, Meeting, Closed
+    emailStatus: varchar("email_status", { length: 32 }).notNull().default("verified"), // verified, risky, guess, invalid
+    source: varchar("source", { length: 64 }), // hunter, linkedin, web_search, company_website, job_board, known_company_backfill
+    sourceUrl: varchar("source_url", { length: 500 }),
+    personalizationNotes: text("personalization_notes"),
+    score: integer("score").default(0),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [
+    index("leads_email_idx").on(t.email),
+    index("leads_status_idx").on(t.status),
+    index("leads_company_idx").on(t.company),
+    index("leads_created_idx").on(t.createdAt),
+  ],
+);
+
+export const emailLogs = pgTable(
+  "email_logs",
+  {
+    id: serial("id").primaryKey(),
+    leadId: integer("lead_id").references(() => leads.id, { onDelete: "set null" }),
+    campaignId: integer("campaign_id"),
+    step: integer("step").notNull().default(1),
+    kind: varchar("kind", { length: 32 }).notNull().default("sequence"), // sequence, reply
+    toEmail: varchar("to_email", { length: 255 }).notNull(),
+    subject: text("subject").notNull(),
+    body: text("body").notNull(),
+    status: varchar("status", { length: 32 }).notNull().default("pending"), // pending, sent, failed, cancelled
+    provider: varchar("provider", { length: 32 }), // gmail, smtp, instantly
+    messageId: varchar("message_id", { length: 255 }),
+    error: text("error"),
+    sentAt: timestamp("sent_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [
+    index("email_logs_lead_idx").on(t.leadId),
+    index("email_logs_status_idx").on(t.status),
+    index("email_logs_created_idx").on(t.createdAt),
+  ],
+);
+
 export type User = typeof users.$inferSelect;
 export type Project = typeof projects.$inferSelect;
+export type Lead = typeof leads.$inferSelect;
+export type EmailLog = typeof emailLogs.$inferSelect;

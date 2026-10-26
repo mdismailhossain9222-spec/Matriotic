@@ -20,3 +20,7 @@ harvey/
 pwtest.txt
 
 *.pwtest*
+
+.env.vercel*
+
+.vercel

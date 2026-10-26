@@ -36,6 +36,13 @@
       "when": 1792134383718,
       "tag": "0004_hard_sunspot",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792433390274,
+      "tag": "0005_colossal_dark_phoenix",
+      "breakpoints": true
     }
   ]
 }

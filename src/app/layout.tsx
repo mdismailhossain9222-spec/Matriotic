@@ -54,6 +54,11 @@ export const metadata: Metadata = {
     siteName: "Matriotic Studios LLC",
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export const viewport: Viewport = {

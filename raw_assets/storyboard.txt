@@ -1,0 +1,5 @@
+00:00 - 00:03: Intro - Text "Matriotic Studios" and tagline "Digital Experiences, Engineered to Convert."
+00:03 - 00:13: Website Tour - Smooth scroll of https://matriotic.vercel.app/
+00:13 - 00:23: Portfolio Showcase - Quick transitions between projects
+00:23 - 00:33: Design Analysis - Typography and color hex codes breakdown
+00:33 - 00:40: Outro - "Get a 100% FREE Demo in 8 Hours" CTA

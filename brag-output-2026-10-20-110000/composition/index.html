@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Matriotic Studios Showcase</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0a0a0f;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      width: 1080px;
+      height: 1920px;
+    }
+
+    .root {
+      width: 1080px;
+      height: 1920px;
+      position: relative;
+    }
+
+    .scene {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      opacity: 0;
+    }
+
+    .scene.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scene.visible {
+      opacity: 1;
+    }
+
+    /* Scene 1: Premium Intro */
+    .scene-1 {
+      background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.2), #0a0a0f);
+    }
+
+    .orb {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.8), rgba(59, 130, 246, 0.4), transparent);
+      filter: blur(40px);
+      animation: orb-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes orb-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    .title-container {
+      text-align: center;
+      z-index: 10;
+    }
+
+    .title {
+      font-size: 72px;
+      font-weight: 900;
+      color: #ffffff;
+      margin: 0;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: title-in 1.5s ease-out forwards;
+    }
+
+    .subtitle {
+      font-size: 28px;
+      font-weight: 400;
+      color: #ffffff;
+      margin-top: 16px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: subtitle-in 1.5s ease-out 0.5s forwards;
+    }
+
+    @keyframes title-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes subtitle-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scene 2: Website Tour */
+    .scene-2 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+    }
+
+    .mobile-frame {
+      width: 390px;
+      height: 844px;
+      background: #0f0f1a;
+      border-radius: 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-screen {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .hero-section {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      background: linear-gradient(180deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .hero-text {
+      font-size: 48px;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: hero-zoom 3s ease-out forwards;
+    }
+
+    @keyframes hero-zoom {
+      0% { opacity: 0; transform: scale(0.8); }
+      20% { opacity: 1; transform: scale(1.05); }
+      40% { transform: scale(1); }
+      60% { transform: scale(1.05); }
+      80% { transform: scale(1); }
+    }
+
+    .features-section {
+      position: absolute;
+      top: 60%;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background: rgba(30, 30, 50, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+      opacity: 0;
+      animation: features-slide 2s ease-out 1s forwards;
+    }
+
+    @keyframes features-slide {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feature-card {
+      height: 60px;
+      background: rgba(139, 92, 246, 0.2);
+      border-radius: 12px;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .overlay-text {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(139, 92, 246, 0.9);
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-size: 24px;
+      font-weight: 600;
+      color: #ffffff;
+      opacity: 0;
+      animation: overlay-in 1s ease-out 2.5s forwards;
+    }
+
+    @keyframes overlay-in {
+      to { opacity: 1; }
+    }
+
+    /* Scene 3: Portfolio Showcase */
+    .scene-3 {
+      background: linear-gradient(135deg, #0a0a0f 0%, #1e1b4b 100%);
+    }
+
+    .portfolio-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .project {
+      position: absolute;
+      width: 400px;
+      height: 700px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+    }
+
+    .project-1 { left: 340px; top: 500px; animation: project-1 10s ease-in-out forwards; }
+    .project-2 { left: 340px; top: 500px; animation: project-2 10s ease-in-out forwards; }
+    .project-3 { left: 340px; top: 500px; animation: project-3 10s ease-in-out forwards; }
+
+    @keyframes project-1 {
+      0%, 10% { opacity: 0; transform: translateY(50px); }
+      20%, 80% { opacity: 1; transform: translateY(0); }
+      90%, 100% { opacity: 0; transform: translateY(-50px); }
+    }
+
+    @keyframes project-2 {
+      0%, 10% { opacity: 0; }
+      20%, 80% { opacity: 0; }
+      30%, 90% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 0; }
+    }
+
+    @keyframes project-3 {
+      0%, 10% { opacity: 0; }
+      20%, 80% { opacity: 0; }
+      40%, 100% { opacity: 1; transform: scale(1); }
+    }
+
+    .project-title { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 20px; }
+    .project-screenshot { width: 280px; height: 280px; background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%); border-radius: 12px; opacity: 0.8; }
+    .cursor { position: absolute; width: 60px; height: 60px; opacity: 0; }
+    .cursor-1 { left: 400px; top: 550px; animation: cursor-1 10s ease-in-out forwards; }
+    .cursor-2 { left: 400px; top: 550px; animation: cursor-2 10s ease-in-out forwards; }
+    .cursor-3 { left: 400px; top: 550px; animation: cursor-3 10s ease-in-out forwards; }
+
+    @keyframes cursor-1 { 0%, 10% { opacity: 0; } 20%, 80% { opacity: 1; } 90%, 100% { opacity: 0; } }
+    @keyframes cursor-2 { 0%, 10% { opacity: 0; } 20%, 80% { opacity: 0; } 30%, 90% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes cursor-3 { 0%, 10% { opacity: 0; } 20%, 80% { opacity: 0; } 40%, 100% { opacity: 1; } }
+
+    /* Scene 4: Design Analysis */
+    .scene-4 { background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%); }
+    .design-container { display: flex; flex-direction: column; align-items: center; gap: 40px; }
+    .project-preview { width: 400px; height: 700px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 20px; position: relative; overflow: hidden; }
+    .bounding-box { position: absolute; top: 100px; left: 50px; width: 200px; height: 80px; border: 3px solid #8b5cf6; border-radius: 8px; opacity: 0; animation: box-draw 2s ease-out 2s forwards; }
+    @keyframes box-draw { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+    .font-label { position: absolute; top: 110px; left: 270px; font-size: 20px; font-weight: 600; color: #ffffff; opacity: 0; animation: label-in 1s ease-out 4s forwards; }
+    @keyframes label-in { to { opacity: 1; } }
+    .color-pills { display: flex; gap: 20px; margin-top: 20px; }
+    .color-pill { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #ffffff; opacity: 0; animation: pill-pop 0.5s ease-out forwards; }
+    .color-pill-1 { background: linear-gradient(135deg, #8b5cf6, #6366f1); animation-delay: 5s; }
+    .color-pill-2 { background: linear-gradient(135deg, #3b82f6, #06b6d4); animation-delay: 5.3s; }
+    .color-pill-3 { background: linear-gradient(135deg, #ec4899, #f43f5e); animation-delay: 5.6s; }
+    @keyframes pill-pop { 0% { opacity: 0; transform: scale(0) rotate(-180deg); } 70% { transform: scale(1.2) rotate(10deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+    .design-text { font-size: 28px; font-weight: 700; color: #ffffff; text-align: center; opacity: 0; animation: text-in 1s ease-out 7s forwards; }
+    @keyframes text-in { to { opacity: 1; } }
+
+    /* Scene 5: CTA & Outro */
+    .scene-5 { background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0f 100%); }
+    .cta-container { text-align: center; z-index: 10; }
+    .cta-text { font-size: 64px; font-weight: 900; background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0; opacity: 0; transform: scale(0.8); animation: cta-in 1.5s ease-out 0.5s forwards; }
+    @keyframes cta-in { to { opacity: 1; transform: scale(1); } }
+    .cta-subtext { font-size: 28px; font-weight: 400; color: #ffffff; margin-top: 20px; opacity: 0; animation: subtext-in 1s ease-out 2s forwards; }
+    @keyframes subtext-in { to { opacity: 1; } }
+    .pulsing-button { margin-top: 40px; padding: 20px 60px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); border: none; border-radius: 50px; font-size: 24px; font-weight: 700; color: #ffffff; cursor: pointer; opacity: 0; animation: button-in 1s ease-out 2.5s forwards; }
+    @keyframes button-in { to { opacity: 1; } }
+    .pulsing-button { animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4); } 50% { box-shadow: 0 10px 60px rgba(139, 92, 246, 0.8); } }
+  </style>
+</head>
+<body data-composition-id="root" data-width="1080" data-height="1920" data-duration="40" class="root clip">
+  <div id="scene-1" class="scene scene-1 clip" data-composition-id="scene-1" data-start="0" data-duration="3">
+    <div class="orb"></div>
+    <div class="title-container">
+      <h1 class="title">Matriotic Studios</h1>
+      <p class="subtitle">Digital Experiences, Engineered to Convert.</p>
+    </div>
+  </div>
+
+  <div id="scene-2" class="scene scene-2 clip" data-composition-id="scene-2" data-start="3" data-duration="10">
+    <div class="mobile-frame">
+      <div class="mobile-screen">
+        <div class="hero-section">
+          <h2 class="hero-text">Boutique Web Development</h2>
+        </div>
+        <div class="features-section">
+          <div class="feature-card"></div>
+          <div class="feature-card"></div>
+          <div class="feature-card"></div>
+        </div>
+      </div>
+    </div>
+    <div class="overlay-text">Boutique Web Development</div>
+  </div>
+
+  <div id="scene-3" class="scene scene-3 clip" data-composition-id="scene-3" data-start="13" data-duration="10">
+    <div class="portfolio-container">
+      <div class="project project-1">
+        <div class="project-title">Project Alpha</div>
+        <div class="project-screenshot"></div>
+      </div>
+      <div class="project project-2">
+        <div class="project-title">Project Beta</div>
+        <div class="project-screenshot"></div>
+      </div>
+      <div class="project project-3">
+        <div class="project-title">Project Gamma</div>
+        <div class="project-screenshot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="scene-4" class="scene scene-4 clip" data-composition-id="scene-4" data-start="23" data-duration="10">
+    <div class="design-container">
+      <div class="project-preview">
+        <div class="bounding-box"></div>
+        <div class="font-label">Modern Sans-Serif</div>
+      </div>
+      <div class="color-pills">
+        <div class="color-pill color-pill-1">#8B5CF6</div>
+        <div class="color-pill color-pill-2">#3B82F6</div>
+        <div class="color-pill color-pill-3">#EC4899</div>
+      </div>
+      <div class="design-text">Unreasonable attention to detail. 98 Lighthouse Score.</div>
+    </div>
+  </div>
+
+  <div id="scene-5" class="scene scene-5 clip" data-composition-id="scene-5" data-start="33" data-duration="7">
+    <div class="cta-container">
+      <h1 class="cta-text">Get a 100% FREE Demo in 8 Hours</h1>
+      <p class="cta-subtext">Link in Bio</p>
+      <button class="pulsing-button">Get Started</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    window.__timelines = window.__timelines || {};
+    window.__timelines["root"] = gsap.timeline({ paused: true });
+    window.__timelines["scene-1"] = gsap.timeline({ paused: true });
+    window.__timelines["scene-2"] = gsap.timeline({ paused: true });
+    window.__timelines["scene-3"] = gsap.timeline({ paused: true });
+    window.__timelines["scene-4"] = gsap.timeline({ paused: true });
+    window.__timelines["scene-5"] = gsap.timeline({ paused: true });
+
+    const scenes = [
+      { id: 'scene-1', duration: 3 },
+      { id: 'scene-2', duration: 10 },
+      { id: 'scene-3', duration: 10 },
+      { id: 'scene-4', duration: 10 },
+      { id: 'scene-5', duration: 7 }
+    ];
+
+    function activateScene(id) {
+      document.querySelectorAll('.scene').forEach(s => s.classList.remove('active', 'visible'));
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.add('active');
+        setTimeout(() => el.classList.add('visible'), 50);
+      }
+    }
+
+    scenes.forEach((scene, index) => {
+      const startTime = index === 0 ? 0 : scenes.slice(0, index).reduce((a, b) => a + b.duration, 0);
+      setTimeout(() => activateScene(scene.id), startTime * 1000);
+    });
+  </script>
+</body>
+</html>
