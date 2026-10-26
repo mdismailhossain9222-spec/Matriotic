@@ -78,17 +78,17 @@
   --bg-alt: #0a0a0a;
   --surface: #141414;
   --surface-2: #1c1c1c;
-  --text: #f3efe6;
-  --text-muted: #a8a091;
-  --accent: #b8893b;
-  --accent-2: #d4a24c;
-  --accent-strong: #d8b763; /* small gold text on near-black (WCAG AA) */
+  --text: #E8DCC8;
+  --text-muted: #B8AE9C;
+  --accent: #C9A876;
+  --accent-2: #D4A24C;
+  --accent-strong: #D4A24C; /* small gold text on near-black (WCAG AA) */
   --gold-1: #d4a24c;
   --gold-2: #a67a2e;
-  --on-gold: #15110a;
-  --edge: rgba(243, 239, 230, 0.09);
+  --on-gold: #0B0B0B;
+  --edge: rgba(201, 168, 118, 0.09);
   --edge-strong: rgba(212, 162, 76, 0.45);
-  --line: rgba(243, 239, 230, 0.12);
+  --line: rgba(201, 168, 118, 0.12);
   --logo-ink: #f3efe6;
   --glass-bg: rgba(14, 14, 14, 0.84);
   --hero-img-o: 0.38;

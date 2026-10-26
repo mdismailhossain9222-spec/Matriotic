@@ -8,6 +8,8 @@ import { ArrowDown } from "lucide-react";
 import { ButtonLink } from "../ui/Button";
 import { OrbitRings } from "../decor/GoldAssets";
 import { useDeviceTier } from "@/hooks/useDeviceTier";
+import { useTheme } from "@/hooks/useTheme";
+import HalftoneBloom from "@/components/HalftoneBloom";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -32,7 +34,7 @@ function BackdropDrift({ animated, children }: { animated: boolean; children: Re
 }
 
 function HeroContent({ animated, children }: { animated: boolean; children: React.ReactNode }) {
-  if (!animated) return <div className="u-container relative">{children}</div>;
+  if (!animated) return <div className="u-container relative z-10">{children}</div>;
   return <ContentDrift>{children}</ContentDrift>;
 }
 
@@ -54,6 +56,8 @@ export default function Hero() {
   const tier = useDeviceTier();
   const isHigh = tier === "high";
   const [ready, setReady] = useState(false);
+  const theme = useTheme();
+  const isDark = theme === "dark";
 
   // FAST FALLBACK: if preloader event doesn't fire within 2s, render content anyway
   useEffect(() => {
@@ -68,17 +72,50 @@ export default function Hero() {
 
   if (!isHigh) {
     return (
-      <section className="min-h-svh relative flex items-center overflow-hidden pt-32 pb-20 md:pt-36">
-        <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-obsidian/70 to-obsidian" />
-        <Image
-          src="/images/hero.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="hero-img object-cover"
-          loading="lazy"
+      <section className="relative min-h-svh overflow-hidden pt-32 pb-20 md:pt-36">
+        <div className="absolute inset-0 z-0">
+          {isDark ? (
+            <HalftoneBloom
+              background="#000000"
+              color1="#D4A24C"
+              color2="#5A3A14"
+              speed={38}
+              size={115}
+              angle={180}
+              dotSize={5}
+              hover={140}
+              reach={520}
+              style={{ width: "100%", height: "100%" }}
+            />
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-obsidian/70 to-obsidian" />
+              <Image
+                src="/images/hero.jpg"
+                alt=""
+                fill
+                sizes="100vw"
+                className="hero-img object-cover"
+                loading="lazy"
+              />
+            </>
+          )}
+          {isDark && (
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(100deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0) 75%)",
+              }}
+            />
+          )}
+        </div>
+        <OrbitRings
+          className={`pointer-events-none absolute -right-24 top-1/2 h-[38rem] w-[38rem] -translate-y-1/2 md:-right-10 ${
+            isDark ? "opacity-55 md:opacity-55" : "opacity-60 md:opacity-90"
+          }`}
         />
-        <OrbitRings className="pointer-events-none absolute -right-24 top-1/2 h-[38rem] w-[38rem] -translate-y-1/2 opacity-60 md:-right-10 md:opacity-90" />
 
         <HeroContent animated={false}>
           <div className="flex items-center gap-4">
@@ -126,21 +163,52 @@ export default function Hero() {
 
   // High tier: original animated version
   return (
-    <section className="min-h-svh relative flex items-center overflow-hidden pt-32 pb-20 md:pt-36">
-      {/* backdrop image */}
-      <HeroBackdrop animated={shouldAnim}>
-        <Image
-          src="/images/hero.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="hero-img object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-obsidian/70 to-obsidian" />
-      </HeroBackdrop>
+    <section className="relative min-h-svh overflow-hidden pt-32 pb-20 md:pt-36">
+      {/* backdrop layer */}
+      <div className="absolute inset-0 z-0">
+        {isDark ? (
+          <HalftoneBloom
+            background="#000000"
+            color1="#D4A24C"
+            color2="#5A3A14"
+            speed={38}
+            size={115}
+            angle={180}
+            dotSize={5}
+            hover={140}
+            reach={520}
+            style={{ width: "100%", height: "100%" }}
+          />
+        ) : (
+          <HeroBackdrop animated={shouldAnim}>
+            <Image
+              src="/images/hero.jpg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="hero-img object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-obsidian/70 to-obsidian" />
+          </HeroBackdrop>
+        )}
+        {isDark && (
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(100deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0) 75%)",
+            }}
+          />
+        )}
+      </div>
 
-      <OrbitRings className="pointer-events-none absolute -right-24 top-1/2 h-[38rem] w-[38rem] -translate-y-1/2 opacity-60 md:-right-10 md:opacity-90" />
+      <OrbitRings
+          className={`pointer-events-none absolute -right-24 top-1/2 h-[38rem] w-[38rem] -translate-y-1/2 md:-right-10 ${
+            isDark ? "opacity-55 md:opacity-55" : "opacity-60 md:opacity-90"
+          }`}
+        />
 
       {/* Static version for mobile/reduced motion - no useScroll */}
       {!shouldAnim && (
