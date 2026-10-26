@@ -113,6 +113,26 @@ export const projects = [
     thumbnail: "/images/work-workoutclub.jpg",
     alt: "The Workout Club Dhaka gym website screenshot",
   },
+  {
+    id: "sonder",
+    name: "SØNDER — High Fashion Brand",
+    tagline: "Redefining the boundaries of modern fashion",
+    category: "E-Commerce / Brand Identity",
+    year: "2026",
+    description:
+      "A futuristic, high-fashion digital experience featuring a custom WebGL shader hero section, seamless animations, and a minimalist aesthetic.",
+    highlights: [
+      "Custom WebGL LightBloom hero shader (deep purple/violet)",
+      "Framer Motion scroll-driven animations",
+      "Clothing-only editorial photography (no models)",
+      "Full-stack e-commerce with cart/checkout",
+      "USD pricing for international market",
+    ],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "WebGL", "Framer Motion", "Vercel"],
+    url: "https://sonder-umber.vercel.app",
+    thumbnail: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1000",
+    alt: "SØNDER high fashion brand website screenshot",
+  },
 ];
 
 export type Project = (typeof projects)[number];
