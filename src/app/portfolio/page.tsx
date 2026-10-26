@@ -51,6 +51,7 @@ export default function PortfolioPage() {
             highlights={project.highlights}
             tech={project.tech}
             url={project.url}
+            liveUrl={project.liveUrl}
           />
         ))}
       </div>

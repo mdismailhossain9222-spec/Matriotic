@@ -129,8 +129,9 @@ export const projects = [
       "USD pricing for international market",
     ],
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "WebGL", "Framer Motion", "Vercel"],
-    url: "https://sonder-umber.vercel.app",
-    thumbnail: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1000",
+    url: "https://github.com/mdismailhossain9222-spec/Somber",
+    liveUrl: "https://sonder-umber.vercel.app",
+    thumbnail: "/images/Sonder.png",
     alt: "SØNDER high fashion brand website screenshot",
   },
 ];
