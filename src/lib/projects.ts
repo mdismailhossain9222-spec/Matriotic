@@ -151,7 +151,7 @@ export const projects = [
     ],
     tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Framer Motion", "Lenis", "hls.js"],
     url: "https://github.com/mdismailhossain9222-spec/Aureq",
-    liveUrl: "#",
+    liveUrl: "https://aureq-flame.vercel.app",
     thumbnail: "/images/aureq.png",
     alt: "Aureq luxury landing page screenshot",
   },
