@@ -134,6 +134,27 @@ export const projects = [
     thumbnail: "/images/Sonder.png",
     alt: "SØNDER high fashion brand website screenshot",
   },
+  {
+    id: "aureq",
+    name: "Aureq",
+    tagline: "Wear the quiet.",
+    category: "Luxury Web Experience / Landing Page",
+    year: "2026",
+    description:
+      "A high-end, minimalist luxury landing page focusing on premium aesthetics, seamless animations, and modern web design — sculptural accessories in titanium, sapphire, and champagne gold, made slow and worn forever.",
+    highlights: [
+      "Cinematic scroll-driven hero with HLS video backdrop",
+      "Instrument Serif × Barlow luxury type pairing",
+      "Liquid glass navigation with magnetic button",
+      "Lenis-smooth scrolling and framer-motion reveals",
+      "Full prefers-reduced-motion support",
+    ],
+    tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Framer Motion", "Lenis", "hls.js"],
+    url: "https://github.com/mdismailhossain9222-spec/Aureq",
+    liveUrl: "#",
+    thumbnail: "/images/aureq.png",
+    alt: "Aureq luxury landing page screenshot",
+  },
 ];
 
 export type Project = (typeof projects)[number];
